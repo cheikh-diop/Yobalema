@@ -1,0 +1,11 @@
+.alert {
+    background: #d1f8cc;
+    padding: 7px;
+    font-size: .9em;
+    margin-bottom: 20px;
+    display: inline-block;
+    animation: 2s alertAnim forwards;
+}
+agm-map {
+    height: 300px;
+}

@@ -1,0 +1,25 @@
+<div class="container">
+  <h1>{{ advert.title }}</h1>
+  <div class="media-left">
+    <img src="../../assets/{{advert.image_url}}" alt="{{advert.image_url}}" class="media-object" style="width:90px">
+  </div>
+  <dl class="list">
+
+    <dt>Type annonce</dt>
+    <dd>{{ advert.type }}</dd>
+    <dt>Description</dt>
+    <dd>{{ advert.description }}</dd>
+    <dt>marque </dt>
+    <dd>{{ advert.mark }}</dd>
+    <dt>modele </dt>
+    <dd>{{ advert.model }}</dd>
+    <dt>date et heure</dt>
+    <dd>{{ advert.date_time }}</dd>
+    <dt>Lieu</dt> <dd> {{ advert.street }} {{ advert.city }} {{ advert.country }} </dd>
+    <div class="form-group">
+      <agm-map [latitude]=advert.address?.latitude [longitude]=advert.address?.longitude [scrollwheel]="false" [zoom]="zoom">
+        <agm-marker [latitude]=advert.address?.latitude [longitude]=advert.address?.longitude></agm-marker>
+      </agm-map>
+    </div>
+  </dl>
+</div>

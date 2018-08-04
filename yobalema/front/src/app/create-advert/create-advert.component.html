@@ -1,0 +1,108 @@
+<div class="container">
+    <form class="form-horizontal">
+      <legend>
+        Créer une annonce
+      </legend>
+      <div>
+        <div [formGroup]="myGroup1" class="form-group">
+          <label class="col-sm-2 control-label" for="textinput">Titre de l'annonce</label>
+          <div class="col-sm-4">
+            <input formControlName="titleControl" [(ngModel)]='advert.title' name="title" class="form-control" id="title" type="text"
+              placeholder="Ajouter un titre à votre annonce">
+            <div class="alert" *ngIf="titleControl.invalid"> Ce champs est obligatoire. </div>
+          </div>
+        </div>
+      </div>
+      <div>
+        <div class="form-group">
+          <label class="col-sm-2 control-label">Type</label>
+          <div class="col-sm-10">
+            <select [(ngModel)]='advert.type' name="type" class="form-control" id="type" aria-placeholder="Choisir le type de votre annonce">
+              <option  *ngIf="auth.loggedIn()">Perdu</option>
+              <option  *ngIf="!auth.loggedIn()">Trouve</option>
+            </select>
+
+            
+          </div>
+        </div>
+      </div>
+  
+      <div>
+        <div class="form-group">
+          <label class="col-sm-2 control-label">Description</label>
+          <div class="col-sm-10">
+            <textarea [(ngModel)]='advert.description' name="description" class="form-control" id="description" rows="3" placeholder="Décrire votre objet"></textarea>
+          </div>
+        </div>
+      </div>
+  
+      <div>
+        <div [formGroup]="myGroup2" class="form-group">
+          <label class="col-sm-2 control-label" for="textinput">Marque</label>
+          <div class="col-sm-4">
+            <input formControlName="markControl" [(ngModel)]='advert.mark' name="mark" class="form-control" id="mark" type="text" value=""
+              placeholder="Ajouter la marque">
+          </div>
+          <div class="alert" *ngIf="markControl.invalid"> Ce champs est obligatoire. </div>
+        </div>
+      </div>
+  
+      <div>
+        <div [formGroup]="myGroup3" class="form-group">
+          <label class="col-sm-2 control-label">Model</label>
+          <div class="col-sm-4">
+            <input formControlName="modelControl" [(ngModel)]='advert.model' name="model" class="form-control" id="model" type="text"
+              placeholder="Ajouter le model">
+          </div>
+          <div class="alert" *ngIf="modelControl.invalid"> Ce champs est obligatoire. </div>
+        </div>
+      </div>
+  
+      <div class="form-group">
+        <div>
+          <label class="col-sm-2 control-label">Ajouter une image</label>
+          <div class="col-sm-10">
+            <label class="custom-file">
+              <input ngModel (change)="readUrl($event)" type="file" id="image_path" name="image_url" class="custom-file-input" accept="image/*"
+                multiple app-filereader>
+              <img [src]="url" style="display: none;">
+            </label>
+          </div>
+        </div>
+      </div>
+  
+  
+      <div class="form-group">
+        <label class="col-sm-2 control-label" for="textinput">La date exacte est </label>
+        <div class="col-sm-4">
+          <input [(ngModel)]='advert.date_time' name="date_time" class="form-control" id="date_time" type="date" value="" placeholder="">
+        </div>
+      </div>
+  
+      <div class="form-group">
+        <label class="col-sm-3 control-label" for="textinput">Adresse de l'objet trouvé </label>
+        <div class="col-sm-5">
+          <input placeholder="Specifier le lieu" autocorrect="off" autocapitalize="off" spellcheck="off" type="text" class="form-control"
+            #search [formControl]="searchControl"> {{advert.address.country}}
+        </div>
+      </div>
+      <div class="form-group">
+        <agm-map [latitude]="latitude" [longitude]="longitude" [scrollwheel]="false" [zoom]="zoom">
+          <agm-marker [latitude]="latitude" [longitude]="longitude"></agm-marker>
+        </agm-map>
+      </div>
+  
+      <!-- Button -->
+      <div>
+        <div class="form-group">
+          <div class="col-sm-offset-2 col-sm-10">
+            <button class="btn btn-primary" *ngIf="!auth.loggedIn()" id="btn-advert" type="submit" (click)='createAdvert()' [disabled]="!(myGroup1.valid && myGroup2.valid && myGroup3.valid)">Envoyer </button>
+            <button class="btn btn-primary" *ngIf="auth.loggedIn()" id="btn-advert" type="submit" (click)='userCreateAdvert()' [disabled]="!(myGroup1.valid && myGroup2.valid && myGroup3.valid)">Envoyer </button>
+            <button class="btn btn-default" type="reset">Annuler </button>
+          </div>
+        </div>
+      </div>
+  
+  
+    </form>
+  </div>

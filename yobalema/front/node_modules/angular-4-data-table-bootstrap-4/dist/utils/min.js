@@ -1,0 +1,18 @@
+import { Pipe } from '@angular/core';
+var MinPipe = /** @class */ (function () {
+    function MinPipe() {
+    }
+    MinPipe.prototype.transform = function (value, args) {
+        return Math.min.apply(null, value);
+    };
+    MinPipe.decorators = [
+        { type: Pipe, args: [{
+                    name: 'min'
+                },] },
+    ];
+    /** @nocollapse */
+    MinPipe.ctorParameters = function () { return []; };
+    return MinPipe;
+}());
+export { MinPipe };
+//# sourceMappingURL=min.js.map

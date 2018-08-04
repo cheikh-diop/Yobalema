@@ -1,0 +1,120 @@
+<h1>
+  Mes annonces
+  <a class="btn btn-primary" [routerLink]="['/createAdvert']"> Creer annonce </a>
+</h1>
+<br/>
+
+<div class="container" *ngIf="advert?.length == 0">
+  <p>
+    vous n'avez pas encore creer d'annonce
+  </p>
+
+</div>
+<table class="table" *ngIf="advert?.length > 0">
+  <tr>
+    <th>Numero</th>
+    <th>titre</th>
+    <th>type</th>
+    <th>description</th>
+    <th></th>
+  </tr>
+  <tr *ngFor="let ad of advert; let i = index">
+    <td>{{i + 1}}</td>
+    <td>{{ad.title}}</td>
+    <td>{{ad.type}}</td>
+    <td>{{ad.description}}</td>
+    <td>
+      <a class="btn btn-primary" [routerLink]="['/advert-detail', ad._id]"> Voir Annonce </a>
+      <a class="btn btn-primary" (click)='matchAdvert(ad)'> Match </a>
+
+    </td>
+    <td>
+      <button type="button" class="btn btn-default edit-btn">
+        <span class="glyphicon glyphicon-pencil" (click)='fixUpdateAdvert(ad._id)' data-toggle="modal" data-target="#myModal">Modifier</span>
+      </button>
+      <button type="button" class="btn btn-default delete-btn" (click)='deleteAdvert(ad._id)'>
+        <span class="glyphicon glyphicon-remove">Supprimer</span>
+      </button>
+    </td>
+  </tr>
+</table>
+<div class="container" *ngIf="matchadvert?.length ==0 ">
+  <h2> Desole il n'y a pas d'annonce qui match </h2>
+</div>
+<div class="container" *ngIf="matchadvert?.length > 0">
+  <h1>Resultat match </h1>
+  <table class="table">
+    <tr>
+      <th>Numero</th>
+      <th>titre</th>
+      <th>type</th>
+      <th>description</th>
+      <th></th>
+    </tr>
+    <tr *ngFor="let adv of matchadvert; let i = index">
+      <td>{{i + 1}}</td>
+      <td>{{advert.title}}</td>
+      <td>{{adv.type}}</td>
+      <td>{{adv.description}}</td>
+      <td>
+        <a class="btn btn-primary" [routerLink]="['/advert-detail', adv._id]"> Voir Annonce </a>
+
+
+      </td>
+      <td>
+
+      </td>
+    </tr>
+  </table>
+</div>
+
+<div class="modal fade" id="myModal">
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content">
+      <!-- Modal Header -->
+      <div class="modal-header">
+        <h4 class="modal-title">Modification annonce</h4>
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+      </div>
+
+      <!-- Modal body -->
+      <div class="modal-body">
+        <div class="row">
+          <div class="col-md-offset-2 col-md-8">
+            <h1>
+              <br/>
+              <small> Merci de valider a la fin </small>
+            </h1>
+          </div>
+        </div>
+        <form #advertForm="ngForm">
+          <div class="form-group">
+            <label for="name">Titre</label>
+            <input type="text" class="form-control" [(ngModel)]="advert1.title" name="title" required>
+          </div>
+          <div class="form-group">
+            <label for="name">Marque</label>
+            <input type="text" class="form-control" [(ngModel)]="advert1.mark" name="mark" required>
+          </div>
+          <div class="form-group">
+            <label for="name">Model</label>
+            <input type="text" class="form-control" [(ngModel)]="advert1.model" name="mark" required>
+          </div>
+          <div class="form-group">
+            <label for="name">description</label>
+            <textarea [(ngModel)]='advert1.description' name="description" class="form-control" id="description" rows="3" placeholder="Décrire votre objet"></textarea>
+          </div>
+          <div class="form-group">
+            <button type="submit" class="btn btn-success" (click)='updateAdvert()' data-dismiss="modal">Enregistrer</button>
+          </div>
+        </form>
+
+      </div>
+
+      <!-- Modal footer -->
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Fermer</button>
+      </div>
+    </div>
+  </div>
+</div>

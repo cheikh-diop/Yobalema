@@ -1,0 +1,26 @@
+import { Pipe } from '@angular/core';
+var PixelConverter = /** @class */ (function () {
+    function PixelConverter() {
+    }
+    PixelConverter.prototype.transform = function (value, args) {
+        if (value === undefined) {
+            return;
+        }
+        if (typeof value === 'string') {
+            return value;
+        }
+        if (typeof value === 'number') {
+            return value + 'px';
+        }
+    };
+    PixelConverter.decorators = [
+        { type: Pipe, args: [{
+                    name: 'px'
+                },] },
+    ];
+    /** @nocollapse */
+    PixelConverter.ctorParameters = function () { return []; };
+    return PixelConverter;
+}());
+export { PixelConverter };
+//# sourceMappingURL=px.js.map

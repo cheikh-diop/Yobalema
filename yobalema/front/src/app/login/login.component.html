@@ -1,0 +1,193 @@
+<div class="container">
+  <ngx-flash-messages></ngx-flash-messages>
+  <div id="loginbox" style="margin-top:50px;" class="mainbox col-md-6 col-md-offset-3 col-sm-8 col-sm-offset-2">
+    <div class="panel panel-info">
+      <div class="panel-heading">
+        <div class="panel-title">Identification</div>
+      </div>
+
+      <div style="padding-top:30px" class="panel-body">
+
+        <div style="display:none" id="login-alert" class="alert col-sm-12"></div>
+
+        <form id="loginform" #logInForm="ngForm" class="form-horizontal" role="form">
+
+          <div style="margin-bottom: 25px" class="input-group">
+            <span class="input-group-addon">
+              <i class="glyphicon glyphicon-user"></i>
+            </span>
+
+             <input type="email" class="form-control" [(ngModel)]="user1.email" name="author"  placeholder="votre email"
+                    required
+                    
+                     pattern="^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$" 
+                     #email1="ngModel">
+                   
+            
+       </div>
+       <div [hidden]="email1.valid || email1.pristine" class="alert">
+          <div [hidden]="!email1.hasError('required')">Veuillez saisir votre email</div>
+          <div [hidden]="!email1.hasError('pattern')">Le format de votre email devrait être
+             <small><b>joe@abc.com</b></small>
+          </div>
+       </div>
+              
+          <div style="margin-bottom: 25px" class="input-group">
+            <span class="input-group-addon">
+              <i class="glyphicon glyphicon-lock"></i>
+            </span>
+            <input id="login-password" [(ngModel)]="user1.password" name="passwordauth" type="password" class="form-control" name="password"
+              placeholder="mot de passe"  required
+              minlength="3"
+              maxlength="30" 
+              #pwd="ngModel">
+              
+          </div>
+          <div [hidden]="pwd.valid || pwd.pristine"
+          class="alert">
+          <div [hidden]="!pwd.hasError('minlength')">Votre mot de passe devrait être au moins 10 caractères</div>
+          <div [hidden]="!pwd.hasError('required')">Veuillez saisir un mot de passe</div>
+       </div>
+          <div style="margin-top:10px" class="form-group">
+
+
+            <div class="col-sm-12 controls">
+              <button id="btn-login" href="#" class="btn btn-success btn-lg btn-block" [disabled]="!logInForm.form.valid"  (click)='logIn()'>s'identifier </button>
+            </div>
+            <div class="col-sm-12 controls">
+              <button id="btn-signUp" class="btn btn-primary btn-lg btn-block" data-toggle="modal" data-target="#myModal">s'inscrire </button>
+            </div>
+          </div>
+        </form>
+        <!-- The Modal -->
+        <div class="modal fade" id="myModal">
+          <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+
+              <!-- Modal Header -->
+              <div class="modal-header">
+                <h4 class="modal-title">Formulaire inscription</h4>
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+              </div>
+
+              <!-- Modal body -->
+              <div class="modal-body">
+                <div class="row">
+                  <div class="col-md-offset-2 col-md-8">
+                    <h1> Inscription
+                      <br/>
+                      <small> Merci de renseigner vos informations </small>
+                    </h1>
+                  </div>
+                </div>
+                <form #userForm="ngForm">
+                  <div class="form-group">
+                    <label for="name">Nom</label>
+                    <input type="text" class="form-control" [(ngModel)]="user.name" name="isbn" required
+                    pattern="[a-zA-Z][a-zA-Z ]+"
+                    #name="ngModel">
+             <div [hidden]="name.valid || name.pristine"
+                  class="alert">
+                   <div [hidden]="!name.hasError('required')">Veuillez saisir nom</div>
+               <div [hidden]="!name.hasError('pattern')">Seuls les alphabets autorisés</div>
+               
+             </div>
+                  </div>
+                  <div class="form-group">
+                    <label for="name">Prenom</label>
+                    <input type="text" class="form-control" [(ngModel)]="user.last_name" name="title" 
+                    required
+                    pattern="[a-zA-Z][a-zA-Z ]+"
+                    #lname="ngModel">
+             <div [hidden]="lname.valid || lname.pristine"
+                  class="alert">
+                   <div [hidden]="!lname.hasError('required')">Veuillez saisir votre prénom</div>
+               <div [hidden]="!lname.hasError('pattern')">Seuls les alphabets autorisés/div>
+               
+             </div>
+                  </div>
+                  </div>
+                  <div class="form-group">
+                    <label for="name">Mail</label>
+                    <input type="email" class="form-control" [(ngModel)]="user.email" name="author" 
+                    required
+                    
+                     pattern="^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$" 
+                     #email="ngModel">
+                     <div [hidden]="email.valid || email.pristine" class="alert">
+                     <div [hidden]="!email.hasError('required')">Veuillez saisir votre email</div>
+                     <div [hidden]="!email.hasError('pattern')">Le format de votre email devrait être
+                        <small><b>joe@abc.com</b></small>
+                     </div>
+                  </div>
+                  </div>
+                  <div class="form-group">
+                    <label for="name">Mot de passe</label>
+                    <input class="form-control" type="password" [(ngModel)]="user.password" name="password" 
+                    required
+                    minlength="3"
+                    maxlength="30" 
+                    #password="ngModel">           
+               
+                <div [hidden]="password.valid || password.pristine"
+                class="alert">
+                <div [hidden]="!password.hasError('minlength')">Votre mot de passe devrait être au moins 10 caractères</div>
+                <div [hidden]="!password.hasError('required')">Veuillez saisir votre mot de passe</div>
+             </div>
+                  </div>
+
+                  <div class="form-group">
+                      <label for="name">Confirm Password</label>
+                      <input type="password" class="form-control" id="confirmPassword"
+                             required
+                             validateEqual="password"
+                             [(ngModel)]="user.confirmPassword" name="confirmPassword"
+                             #confirmPassword="ngModel">
+                      <div [hidden]="confirmPassword.valid || confirmPassword.pristine"
+                           class="alert">
+                           Les mots de passe ne correspondent pas
+                      </div>
+                    </div>
+                  <div class="form-group">
+                    <label for="name">numero de rue et rue </label>
+                    <input type="text" class="form-control" [(ngModel)]="user.address.street" name="publisher" >
+                  </div>
+                  <div class="form-group">
+                    <label for="name">Ville </label>
+                    <input type="text" class="form-control" [(ngModel)]="user.address.city" name="publisher">
+                  </div>
+                  <div class="form-group">
+                    <label for="name">Code Ville </label>
+                    <input type="text" class="form-control" [(ngModel)]="user.address.city_code" name="publisher" >
+                  </div>
+                  <div class="form-group">
+                    <label for="name">Pays </label>
+                    <input type="text" class="form-control" [(ngModel)]="user.address.country" name="publisher" >
+                  </div>
+                  <div class="form-group">
+                    <button type="submit" class="btn btn-success" [disabled]="!userForm.form.valid"  (click)='createUser()' data-dismiss="modal">Enregistrer</button>
+                  </div>
+                </form>
+
+              </div>
+
+              <!-- Modal footer -->
+              <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Fermer</button>
+              </div>
+
+            </div>
+          </div>
+        </div>
+
+
+
+      </div>
+
+
+
+
+
+    </div>
+  </div>
+</div>

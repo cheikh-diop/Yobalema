@@ -1,0 +1,45 @@
+<nav class="navbar navbar-default">
+  <div class="container">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false"
+        aria-controls="navbar">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="#"> FindMyJect</a>
+    </div>
+    <div id="navbar" class="collapse navbar-collapse">
+      <ul class="nav navbar-nav navbar-left">
+        <li [routerLinkActive]="['active']" [routerLinkActiveOptions]="{exact:true}">
+          <a *ngIf="!auth.loggedIn()" [routerLink]="['/home']">Accueil</a>
+        </li>
+        <li *ngIf="auth.loggedIn()" [routerLinkActive]="['active']" [routerLinkActiveOptions]="{exact:true}">
+          <a [routerLink]="['/dashboard']">Tableau de bord</a>
+        </li>
+        <li *ngIf="auth.loggedIn()" [routerLinkActive]="['active']" [routerLinkActiveOptions]="{exact:true}">
+          <a [routerLink]="['/adverts']">Voir les annonces</a>
+        </li>
+        <li *ngIf="auth.loggedIn()" [routerLinkActive]="['active']" [routerLinkActiveOptions]="{exact:true}">
+          <a [routerLink]="['/myadvert']">Gerer Mes annonces</a>
+        </li>
+        
+      </ul>
+
+      <ul class="nav navbar-nav navbar-right">
+        <li *ngIf="!auth.loggedIn()" [routerLinkActive]="['active']" [routerLinkActiveOptions]="{exact:true}">
+          <a [routerLink]="['/login']">Page de connection</a>
+        </li>
+
+        <li>
+          <a *ngIf="auth.loggedIn()" (click)="onLogOutClick()" href="#">Se deconnecter</a>
+        </li>
+      </ul>
+    </div>
+    <!--/.nav-collapse -->
+  </div>
+</nav>
+
+
+
